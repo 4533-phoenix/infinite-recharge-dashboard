@@ -1,6 +1,7 @@
 import wx
 
 from panels import GameTimerPanel
+from panels import DriverAssistPanel
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -23,8 +24,15 @@ class MainFrame(wx.Frame):
             flag=wx.EXPAND
         )
 
+        gbs.Add(
+            DriverAssistPanel(mainPanel),
+            wx.GBPosition(1,0),
+            wx.GBSpan(2, 2),
+            flag=wx.EXPAND
+        )
         gbs.AddGrowableCol(0, 1)
         gbs.AddGrowableCol(1, 2)
         gbs.AddGrowableCol(2, 1)
+        gbs.AddGrowableRow(1, 1)
 
         gbs.Fit(self)
