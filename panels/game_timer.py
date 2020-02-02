@@ -1,8 +1,7 @@
 import wx
-import wx.gizmos as gizmos
 
-MATCH_START = 60
-TELEOP_START =  45
+MATCH_START = 150
+TELEOP_START =  135
 END_GAME_START = 30
 
 YELLOW = (255, 255, 77)
@@ -13,6 +12,14 @@ RED = (255, 25, 25)
 class GameTimerPanel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
+
+        self.matchTime = MATCH_START
+        self.currentTime = self.matchTime
+        self.SetBackgroundColour(YELLOW)
+
+        self.timer = wx.Timer(self, -1)
+        self.Bind(wx.EVT_TIMER, self.OnTimer, self.timer)
+
         self.buildPanel()
 
     def buildPanel(self):
@@ -20,29 +27,28 @@ class GameTimerPanel(wx.Panel):
         self.SetSizer(sizer)
 
         self.text = wx.StaticText(self,
-            label="0:00",
+            label=self.GetFormattedTime(),
             style=wx.ALIGN_CENTRE_HORIZONTAL | wx.ST_NO_AUTORESIZE
         )
-        font = wx.Font(48, wx.MODERN, wx.NORMAL, wx.BOLD)
+
         self.text.SetForegroundColour(wx.BLACK)
-        self.text.SetFont(font)
+        self.text.SetFont(wx.Font(48, wx.MODERN, wx.NORMAL, wx.BOLD))
 
         sizer.Add(self.text, 1, flag=wx.EXPAND)
 
-        self.matchTime = MATCH_START
-        self.currentTime = self.matchTime
+    def Start(self):
+        self.timer.Start()
 
-        self.OnTimer(None)
+    def Stop(self):
+        self.time.Stop()
 
-        self.timer = wx.Timer(self, -1)
-        self.Bind(wx.EVT_TIMER, self.OnTimer, self.timer)
-        self.timer.Start(1000)
+    def GetFormattedTime(self):
+        minutes = self.currentTime // 60
+        seconds = self.currentTime % 60
+        return "{}:{:02}".format(minutes, seconds)
 
     def OnTimer(self, event):
         self.currentTime -= 1
-
-        minutes = self.currentTime // 60
-        seconds = self.currentTime % 60
 
         if (self.currentTime > TELEOP_START):
             self.SetBackgroundColour(YELLOW)
@@ -54,4 +60,4 @@ class GameTimerPanel(wx.Panel):
             self.SetBackgroundColour(RED)
             self.timer.Stop()
 
-        self.text.SetLabel("{}:{:02}".format(minutes, seconds))
+        self.text.SetLabel(self.GetFormattedTime())
