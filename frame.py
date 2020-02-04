@@ -4,6 +4,7 @@ from panels import GameTimerPanel
 from panels import DriverAssistPanel
 from panels import IntakeStatusPanel
 from panels import ButtonsPanel
+from panels import CameraButtonsPanel
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -14,7 +15,7 @@ class MainFrame(wx.Frame):
     def build(self):
         self.SetInitialSize(size=wx.Size(500,400))
 
-        gbs = wx.GridBagSizer(4, 2)
+        gbs = wx.GridBagSizer(5, 2)
 
         mainPanel = wx.Panel(self)
         mainPanel.SetSizer(gbs)
@@ -41,8 +42,15 @@ class MainFrame(wx.Frame):
         )
 
         gbs.Add(
-            ButtonsPanel(mainPanel),
+            CameraButtonsPanel(mainPanel),
             wx.GBPosition(3, 0),
+            wx.GBSpan(1, 2),
+            flag=wx.EXPAND
+        )
+
+        gbs.Add(
+            ButtonsPanel(mainPanel),
+            wx.GBPosition(4, 0),
             wx.GBSpan(1, 3),
             flag=wx.EXPAND
         )
