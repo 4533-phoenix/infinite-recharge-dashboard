@@ -37,7 +37,7 @@ class MainFrame(wx.Frame):
         gbs.Add(
             IntakeStatusPanel(mainPanel),
             wx.GBPosition(1, 2),
-            wx.GBSpan(2, 1),
+            wx.GBSpan(3, 1),
             flag=wx.EXPAND
         )
 
