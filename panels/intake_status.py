@@ -12,32 +12,17 @@ class IntakeStatusPanel(wx.Panel):
         sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(sizer)
 
-        sizer.Add(
+        self.powercells = [
             PowerCellPanel(self),
-            1,
-            flag=wx.EXPAND
-        )
-
-        sizer.Add(
             PowerCellPanel(self),
-            1,
-            flag=wx.EXPAND
-        )        
-
-        sizer.Add(
             PowerCellPanel(self),
-            1,
-            flag=wx.EXPAND
-        )
-
-        sizer.Add(
             PowerCellPanel(self),
-            1,
-            flag=wx.EXPAND
-        )        
-
-        sizer.Add(
-            PowerCellPanel(self),
-            1,
-            flag=wx.EXPAND
-        )
+            PowerCellPanel(self)
+        ]
+        for pcp in self.powercells:
+            sizer.Add(pcp, 1, flag=wx.EXPAND)
+    
+    def update(self, status):
+        for i in range(len(status)):
+            self.powercells[i].update(status[i])
+    

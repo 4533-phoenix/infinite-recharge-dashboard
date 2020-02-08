@@ -13,6 +13,8 @@ class MainFrame(wx.Frame):
         self.build()
         self.Center()
 
+
+
     def build(self):
         self.SetInitialSize(size=wx.Size(500,400))
 
@@ -20,6 +22,10 @@ class MainFrame(wx.Frame):
 
         mainPanel = wx.Panel(self)
         mainPanel.SetSizer(gbs)
+
+        sensor = [True, False, False, True, True]
+        self.intakeStatus = IntakeStatusPanel(mainPanel)
+        self.intakeStatus.update(sensor)
 
         gbs.Add(
             GameTimerPanel(mainPanel),
@@ -36,7 +42,7 @@ class MainFrame(wx.Frame):
         )
 
         gbs.Add(
-            IntakeStatusPanel(mainPanel),
+            self.intakeStatus,
             wx.GBPosition(1, 2),
             wx.GBSpan(3, 1),
             flag=wx.EXPAND
