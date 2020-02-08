@@ -1,4 +1,5 @@
 import wx
+from .power_cell import PowerCellPanel
 
 class IntakeStatusPanel(wx.Panel):
     def __init__(self, parent):
@@ -11,10 +12,32 @@ class IntakeStatusPanel(wx.Panel):
         sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(sizer)
 
-        text = wx.StaticText(self,
-            label="Intake",
-            style=wx.ALIGN_CENTRE_HORIZONTAL
+        sizer.Add(
+            PowerCellPanel(self),
+            1,
+            flag=wx.EXPAND
         )
 
-        sizer.Add(text, 1, flag=wx.EXPAND)
+        sizer.Add(
+            PowerCellPanel(self),
+            1,
+            flag=wx.EXPAND
+        )        
 
+        sizer.Add(
+            PowerCellPanel(self),
+            1,
+            flag=wx.EXPAND
+        )
+
+        sizer.Add(
+            PowerCellPanel(self),
+            1,
+            flag=wx.EXPAND
+        )        
+
+        sizer.Add(
+            PowerCellPanel(self),
+            1,
+            flag=wx.EXPAND
+        )

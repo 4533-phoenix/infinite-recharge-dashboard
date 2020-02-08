@@ -3,3 +3,4 @@ from .driver_assist import DriverAssistPanel
 from .intake_status import IntakeStatusPanel
 from .buttons import ButtonsPanel
 from .camera_buttons import CameraButtonsPanel
+from .power_cell import PowerCellPanel

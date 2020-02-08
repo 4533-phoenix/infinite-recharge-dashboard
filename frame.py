@@ -5,6 +5,7 @@ from panels import DriverAssistPanel
 from panels import IntakeStatusPanel
 from panels import ButtonsPanel
 from panels import CameraButtonsPanel
+from panels import PowerCellPanel
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title):
