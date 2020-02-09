@@ -3,7 +3,7 @@ import wx
 from panels import GameTimerPanel
 from panels import DriverAssistPanel
 from panels import IntakeStatusPanel
-from panels import ButtonsPanel
+from panels import ControlButtonsPanel
 from panels import CameraButtonsPanel
 from panels import PowerCellPanel
 
@@ -23,9 +23,8 @@ class MainFrame(wx.Frame):
         mainPanel = wx.Panel(self)
         mainPanel.SetSizer(gbs)
 
-        sensor = [True, False, False, True, True]
         self.intakeStatus = IntakeStatusPanel(mainPanel)
-        self.intakeStatus.update(sensor)
+        self.intakeStatus.update([True, True, False, False, True])
 
         gbs.Add(
             GameTimerPanel(mainPanel),
@@ -56,7 +55,7 @@ class MainFrame(wx.Frame):
         )
 
         gbs.Add(
-            ButtonsPanel(mainPanel),
+            ControlButtonsPanel(mainPanel),
             wx.GBPosition(4, 0),
             wx.GBSpan(1, 3),
             flag=wx.EXPAND

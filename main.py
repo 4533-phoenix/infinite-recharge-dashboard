@@ -2,11 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import wx
+import yaml
 
 from frame import MainFrame
+from config import Config
+from app import DashboardApp
 
 def main():
-    app = wx.App(False)
+    app = DashboardApp()
+    app.SetAppName("FOO BAR")
     frame = MainFrame(None, "Infinite Recharge Dashboard")
     frame.Show(True)
     app.MainLoop()

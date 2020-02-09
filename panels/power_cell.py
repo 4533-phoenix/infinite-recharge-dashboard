@@ -3,6 +3,9 @@ import wx
 class PowerCellPanel(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
+
+        self.On = False
+
         self.Bind(wx.EVT_PAINT, self.OnPaint)
         self.Bind(wx.EVT_SIZE, self.OnSize)
         self.On = False
@@ -13,16 +16,13 @@ class PowerCellPanel(wx.Panel):
     def OnPaint(self, e):
         dc = wx.PaintDC(self)
 
-        dc.Clear()
-
         if self.On:
-            print(str(self) + ": yellow") 
             brush = wx.Brush("yellow")
         else:
-            print(str(self) + ": red")
             brush = wx.Brush("red")
 
         dc.SetBrush(brush)
+
         size = self.GetSize()
         radius = min(size.width, size.height)/2
         center = wx.Point(size.width/2, size.height/2)

@@ -1,0 +1,11 @@
+telemetry:
+  host: 127.0.0.1
+  port: 5801
+  database: robot_telemetry
+auto_modes:
+- name: Trench
+  modes:
+  - name: Cross Initiation Line
+    display_name: cross_initiation_line
+  - name: Collect Trench Powercells
+    display_name: collect_trench_powercells
