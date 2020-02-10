@@ -2,6 +2,7 @@ import wx
 
 from app import DashboardApp
 from dialogs import SystemDialog
+from dialogs import AutoDialog
 
 class ControlButtonsPanel(wx.Panel):
     def __init__(self, parent):
@@ -13,6 +14,7 @@ class ControlButtonsPanel(wx.Panel):
         self.SetSizer(sizer)
 
         self.autoButton = wx.Button(self, label="Autonomous")
+        self.autoButton.Bind(wx.EVT_BUTTON, self.on_auto)
         self.systemButton = wx.Button(self, label="System")
         self.systemButton.Bind(wx.EVT_BUTTON, self.on_system)
 
@@ -28,6 +30,11 @@ class ControlButtonsPanel(wx.Panel):
         dlg.ShowModal()
         dlg.Destroy()
 
+    def on_auto(self, event):
+        config = DashboardApp.Get().config
+        dlg = AutoDialog(self, config)
+        dlg.ShowModal()
+        dlg.Destroy()
 
 class CameraButtonsPanel(wx.Panel):
     def __init__(self, parent):

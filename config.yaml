@@ -5,7 +5,20 @@ telemetry:
 auto_modes:
 - name: Trench
   modes:
-  - name: Cross Initiation Line
-    display_name: cross_initiation_line
-  - name: Collect Trench Powercells
-    display_name: collect_trench_powercells
+  - name: cross_initiation_line
+    display_name: Cross Initiation Line
+  - name: collect_trench_powercells
+    display_name: Collect Trench Powercells
+- name: Goal
+  modes:
+    - name: score_trench
+      display_name: Score Pickup Trench
+    - name: pickup_generator_score
+      display_name: Pickup Generator Score
+- name: Mid
+  modes:
+    - name: score_pickup_generator
+      display_name: Score Generator Pickup
+    - name: generator_pickup_score
+      display_name: Generator Pickup Score
+      
