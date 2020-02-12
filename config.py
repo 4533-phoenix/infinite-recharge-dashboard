@@ -4,7 +4,7 @@ import yaml
 
 class Config:
     def __init__(self, path, entries):
-        self.__dict__ = entries
+        self.entries = entries
         self.path = path
 
     @staticmethod
@@ -18,6 +18,18 @@ class Config:
             path = self.path
         with open(path, 'w') as out:
             yaml.dump(self.__dict__, out, Dumper=SafeDumper)
+
+    def get_auto_mode_groups(self):
+        return [mode['name'] for mode in self.entries['auto_modes']]
+
+    def get_auto_selection(self):
+        return self.entries['auto']
+
+    def get_auto_modes_by_group(self, group):
+        for item in self.entries['auto_modes']:
+            if item['name'] == group:
+                return [x['display_name'] for x in item['modes']]
+        return []
 
 def construct_yaml_map(self, node):
     data = collections.OrderedDict()
