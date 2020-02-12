@@ -2,6 +2,9 @@ telemetry:
   host: 127.0.0.1
   port: 5801
   database: robot_telemetry
+auto:
+  name: Trench
+  mode: collect_trench_powercells
 auto_modes:
 - name: Trench
   modes:
@@ -21,4 +24,4 @@ auto_modes:
       display_name: Score Generator Pickup
     - name: generator_pickup_score
       display_name: Generator Pickup Score
-      
+
