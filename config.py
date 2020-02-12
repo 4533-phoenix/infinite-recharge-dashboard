@@ -17,7 +17,7 @@ class Config:
         if path is "":
             path = self.path
         with open(path, 'w') as out:
-            yaml.dump(self.__dict__, out, Dumper=SafeDumper)
+            yaml.dump(self.entries, out, Dumper=SafeDumper)
 
     def get_auto_mode_groups(self):
         return [mode['name'] for mode in self.entries['auto_modes']]
@@ -25,11 +25,17 @@ class Config:
     def get_auto_selection(self):
         return self.entries['auto']
 
+    def get_auto_mode_group(self, index):
+        return self.entries['auto_modes'][index]
+
     def get_auto_modes_by_group(self, group):
         for item in self.entries['auto_modes']:
             if item['name'] == group:
                 return [x['display_name'] for x in item['modes']]
         return []
+
+    def get_auto_mode_by_index(self, group, index):
+        return self.get_auto_modes_by_group(group)[index]
 
 def construct_yaml_map(self, node):
     data = collections.OrderedDict()
