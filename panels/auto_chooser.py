@@ -1,22 +1,19 @@
 import wx
 from app import DashboardApp
 
-class AutoDialog(wx.Dialog):
+class AutoChooserPanel(wx.Panel):
     def __init__(self, parent, config):
-        super().__init__(parent, title="Autonomous Select")
+        wx.Panel.__init__(self, parent)
         self.config = config
         self.build()
 
     def build(self):
         sizer = wx.BoxSizer(wx.VERTICAL)
+        self.SetSizer(sizer)
+
         dropDownPanel = self.createAutoPanel(self)
         sizer.Add(dropDownPanel, 1, border=5, flag=wx.ALL | wx.EXPAND)
 
-        buttonSizer = self.CreateButtonSizer(wx.OK | wx.CANCEL)
-        sizer.Add(buttonSizer, 0, border=5, flag=wx.ALL | wx.EXPAND)
-
-        self.SetSizer(sizer)
-        self.Fit()
 
     def createAutoPanel(self, parent):
         panel = wx.Panel(parent)
@@ -34,5 +31,9 @@ class AutoDialog(wx.Dialog):
         modesList = wx.ListBox(panel, choices=auto_modes, style=wx.LB_SINGLE)
         modesList.SetStringSelection(auto_selection['mode'])
         sizer.Add(modesList, 1, border=5, flag=wx.ALL | wx.EXPAND)
+
+        self.setAutoButton = wx.Button(panel, label="Select Autonomous")
+
+        sizer.Add(self.setAutoButton, 0, flag=wx.CENTER | wx.EXPAND)        
 
         return panel

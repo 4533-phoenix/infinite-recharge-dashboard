@@ -6,19 +6,21 @@ from panels import IntakeStatusPanel
 from panels import ControlButtonsPanel
 from panels import CameraButtonsPanel
 from panels import PowerCellPanel
+from panels import AutoChooserPanel
+from app import DashboardApp
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, title=title, size=wx.Size(400,500))
+        wx.Frame.__init__(self, parent, title=title, size=wx.Size(1000,1000))
         self.build()
         self.Center()
 
 
 
     def build(self):
-        self.SetInitialSize(size=wx.Size(500,400))
+        self.SetInitialSize(size=wx.Size(700,700))
 
-        gbs = wx.GridBagSizer(5, 2)
+        gbs = wx.GridBagSizer(5, 4)
 
         mainPanel = wx.Panel(self)
         mainPanel.SetSizer(gbs)
@@ -26,44 +28,47 @@ class MainFrame(wx.Frame):
         self.intakeStatus = IntakeStatusPanel(mainPanel)
         self.intakeStatus.update([True, True, False, False, True])
 
+        config = DashboardApp.Get().config
+
+        gbs.Add(
+            self.intakeStatus,
+            wx.GBPosition(1, 3),
+            wx.GBSpan(4, 1),
+            flag=wx.EXPAND
+        )
+
         gbs.Add(
             GameTimerPanel(mainPanel),
             wx.GBPosition(0,0),
-            wx.GBSpan(1, 3),
+            wx.GBSpan(1, 4),
             flag=wx.EXPAND
         )
 
         gbs.Add(
             DriverAssistPanel(mainPanel),
-            wx.GBPosition(1,0),
-            wx.GBSpan(2, 2),
-            flag=wx.EXPAND
-        )
-
-        gbs.Add(
-            self.intakeStatus,
-            wx.GBPosition(1, 2),
-            wx.GBSpan(3, 1),
+            wx.GBPosition(1,1),
+            wx.GBSpan(3, 2),
             flag=wx.EXPAND
         )
 
         gbs.Add(
             CameraButtonsPanel(mainPanel),
-            wx.GBPosition(3, 0),
+            wx.GBPosition(4, 1),
             wx.GBSpan(1, 2),
             flag=wx.EXPAND
         )
-
+        
         gbs.Add(
-            ControlButtonsPanel(mainPanel),
-            wx.GBPosition(4, 0),
-            wx.GBSpan(1, 3),
+            AutoChooserPanel(mainPanel, config),
+            wx.GBPosition(1,0),
+            wx.GBSpan(4,1),
             flag=wx.EXPAND
         )
 
         gbs.AddGrowableCol(0, 1)
         gbs.AddGrowableCol(1, 3)
         gbs.AddGrowableCol(2, 1)
+        gbs.AddGrowableCol(3, 1)
         gbs.AddGrowableRow(1, 1)
 
         gbs.Fit(self)
