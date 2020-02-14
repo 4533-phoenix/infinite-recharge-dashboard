@@ -17,6 +17,10 @@ class MainFrame(wx.Frame):
         screenSize = wx.DisplaySize()
         initialSize = (screenSize[0] * 0.60, screenSize[1] * 0.60)
 
+        self.statusBar = self.CreateStatusBar(2)
+        self.set_telemetry_status(False)
+        self.set_camera_status(False)
+
         self.SetInitialSize(initialSize)
         self.config = DashboardApp.Get().config
         self.build()
@@ -77,3 +81,19 @@ class MainFrame(wx.Frame):
         gbs.AddGrowableRow(2, 1)
 
         gbs.Fit(self)
+
+    def set_telemetry_status(self, status):
+        if status:
+            status = "connected"
+        else:
+            status = "disconnected"
+
+        self.SetStatusText("Telemetry: {}".format(status), 0)
+
+    def set_camera_status(self, status):
+        if status:
+            status = "connected"
+        else:
+            status = "disconnected"
+
+        self.SetStatusText("Camera: {}".format(status), 1)
