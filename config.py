@@ -31,7 +31,7 @@ class Config:
     def get_auto_modes_by_group(self, group):
         for item in self.entries['auto_modes']:
             if item['name'] == group:
-                return [x['display_name'] for x in item['modes']]
+                return [x for x in item['modes']]
         return []
 
     def get_auto_mode_by_index(self, group, index):

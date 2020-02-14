@@ -8,20 +8,13 @@ auto:
 auto_modes:
 - name: Trench
   modes:
-  - name: cross_initiation_line
-    display_name: Cross Initiation Line
-  - name: collect_trench_powercells
-    display_name: Collect Trench Powercells
+  - cross_initiation_line
+  - collect_trench_powercells
 - name: Goal
   modes:
-    - name: score_trench
-      display_name: Score Pickup Trench
-    - name: pickup_generator_score
-      display_name: Pickup Generator Score
+  - score_trench
+  - pickup_generator_score
 - name: Mid
   modes:
-    - name: score_pickup_generator
-      display_name: Score Generator Pickup
-    - name: generator_pickup_score
-      display_name: Generator Pickup Score
-
+  - score_pickup_generator
+  - generator_pickup_score
