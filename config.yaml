@@ -1,7 +1,7 @@
 telemetry:
   host: 127.0.0.1
-  port: 5801
-  database: robot_telemetry
+  port: 6379
+  database: 0
 auto:
   name: Trench
   mode: collect_trench_powercells

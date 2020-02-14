@@ -5,4 +5,5 @@
 ```sh
 $ pip install pyyaml
 $ pip install redis
+$ pip install tenacity
 ```

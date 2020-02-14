@@ -10,6 +10,9 @@ from panels import AutoChooserPanel
 
 from app import DashboardApp
 
+from threads import *
+import json
+
 class MainFrame(wx.Frame):
     def __init__(self, parent, title):
         wx.Frame.__init__(self, parent, title=title)
@@ -25,6 +28,14 @@ class MainFrame(wx.Frame):
         self.config = DashboardApp.Get().config
         self.build()
         self.Center()
+
+        # Registery handler for redis connection events
+        EVT_REDIS_CONN(self, self.on_redis_connect)
+
+        # Start the redis connection thread. This is a thread because it will
+        # continue to retry connection until it is successful. It will fire a
+        # RedisConnectEvent when the connection is successful.
+        RedisConnectThread(self.config.get_telemetry(), self)
 
     def build(self):
 
@@ -125,3 +136,19 @@ class MainFrame(wx.Frame):
             status = "disconnected"
 
         self.SetStatusText("Camera: {}".format(status), 1)
+
+    def on_redis_connect(self, event):
+        self.redis_conn = event.connection
+        self.set_telemetry_status(True)
+        telemetry = self.redis_conn.pubsub()
+
+        channels = {
+            "telemetry": self.receive_message
+        }
+
+        subscription = telemetry.subscribe(**channels)
+        telemetry.run_in_thread(sleep_time=0.01)
+
+    def receive_message(self, message):
+        m = json.loads(message['data'])
+        print(m)
