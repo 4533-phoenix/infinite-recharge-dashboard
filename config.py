@@ -37,6 +37,9 @@ class Config:
     def get_auto_mode_by_index(self, group, index):
         return self.get_auto_modes_by_group(group)[index]
 
+    def get_telemetry(self):
+        return self.entries['telemetry']
+
 def construct_yaml_map(self, node):
     data = collections.OrderedDict()
     yield data
