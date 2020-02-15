@@ -28,10 +28,18 @@ class Config:
     def get_auto_mode_group(self, index):
         return self.entries['auto_modes'][index]
 
+    def set_selected_auto_group(self, group):
+        auto = self.get_auto_selection()
+        auto['name'] = group
+
+    def set_selected_auto_mode(self, mode):
+        auto = self.get_auto_selection()
+        auto['mode'] = mode
+
     def get_auto_modes_by_group(self, group):
         for item in self.entries['auto_modes']:
             if item['name'] == group:
-                return [x for x in item['modes']]
+                return [x.replace('_', ' ').title() for x in item['modes']]
         return []
 
     def get_auto_mode_by_index(self, group, index):

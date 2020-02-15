@@ -61,7 +61,6 @@ class MainFrame(wx.Frame):
         mainPanel.SetSizer(gbs)
 
         self.intakeStatus = IntakeStatusPanel(mainPanel)
-        self.intakeStatus.update([True, True, False, False, True])
 
         # Get the configuration from the global 'Application'.
         config = DashboardApp.Get().config
@@ -151,4 +150,4 @@ class MainFrame(wx.Frame):
 
     def receive_message(self, message):
         m = json.loads(message['data'])
-        print(m)
+        self.intakeStatus.update(m['powercells'])
