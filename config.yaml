@@ -3,18 +3,23 @@ telemetry:
   port: 6379
   database: 0
 auto:
-  name: Trench
-  mode: collect_trench_powercells
+  name: Home Trench
+  mode: Trench Pickup Score
 auto_modes:
-- name: Trench
+- name: Away Trench
   modes:
-  - cross_initiation_line
   - collect_trench_powercells
+  - cross_initiation_line
+- name: Home  Trench
+  modes:
+  - trench_pickup_score
 - name: Goal
   modes:
   - score_trench
   - pickup_generator_score
+  - cross_initiation_line
 - name: Mid
   modes:
   - score_pickup_generator
   - generator_pickup_score
+  - cross_initiation_line
