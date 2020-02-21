@@ -13,6 +13,7 @@ auto_modes:
 - name: Home  Trench
   modes:
   - trench_pickup_score
+  - cross_initiation_line
 - name: Goal
   modes:
   - score_trench
